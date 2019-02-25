@@ -1,8 +1,5 @@
 require 'sinatra'
 require "sinatra/namespace"
-require'mongoid'
-
-Mongoid.load! "mongoid.config"
 
 class DecryptData
   attr_reader :data, :result
@@ -29,13 +26,3 @@ get '/' do
   'Welcome to LoveStory!'
 end
 
-namespace '/api/v1 ' do
-
-  before do
-    content_type 'application/json'
-  end
-
-  get '/lovestories' do
-    DecryptData.new('A loves B but B hates A.')
-  end
-end
