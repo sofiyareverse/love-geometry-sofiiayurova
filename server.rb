@@ -1,6 +1,6 @@
 require 'sinatra'
-require "sinatra/namespace"
-require'mongoid'
+require 'mongoid'
+require 'json'
 
 Mongoid.load! "mongoid.config"
 
@@ -26,16 +26,10 @@ class DecryptData
 end
 
 get '/' do
-  'Welcome to LoveStory!'
+  'Welcome to lovestories!'
 end
 
-namespace '/api/v1 ' do
-
-  before do
-    content_type 'application/json'
-  end
-
-  get '/lovestories' do
-    DecryptData.new('A loves B but B hates A.')
-  end
+post '/lovestories' do
+  result = DecryptData.new(JSON.parse(request.body.read)['data']).call
+  result.to_json
 end
