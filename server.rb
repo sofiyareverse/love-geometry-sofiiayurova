@@ -23,6 +23,10 @@ class DecryptData
 end
 
 get '/' do
-  'Welcome to LoveStory!'
+  'Welcome to lovestories!'
 end
 
+post '/lovestories' do
+  result = DecryptData.new(JSON.parse(request.body.read)['data']).call
+  result.to_json
+end
