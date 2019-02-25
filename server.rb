@@ -1,5 +1,5 @@
 require 'sinatra'
-require "sinatra/namespace"
+require 'json'
 
 class DecryptData
   attr_reader :data, :result
